@@ -6,7 +6,7 @@ import (
     "fmt"
     "io/ioutil"
     "log"
-    "net/http"
+    // "net/http"
     "os"
     "path"
 )
@@ -21,24 +21,13 @@ type sourceMap struct {
 func getSourceMap(url string) sourceMap {
     var m sourceMap
 
-    res, err := http.Get(url)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    if res.StatusCode != 200 {
-        log.Fatal("sourceMap URL request return != 200")
-    }
-
-    body, err := ioutil.ReadAll(res.Body)
-    fmt.Printf("[+] Read %d bytes, parsing JSON\n", len(body))
-    res.Body.Close()
+    dat, err := ioutil.ReadFile(url)
 
     if err != nil {
         log.Fatal(err)
     }
 
-    err = json.Unmarshal(body, &m)
+    err = json.Unmarshal(dat, &m)
     if err != nil {
         log.Fatalf("Error parsing JSON: %s", err)
     }
@@ -65,18 +54,18 @@ func writeFile(p string, content string) {
 
 func main() {
     outDir := flag.String("output", "", "Source file output directory")
-    url := flag.String("url", "", "URL to the Sourcemap file")
+    input := flag.String("input", "", "URL to the Sourcemap file")
     help := flag.Bool("help", false, "Show help")
     flag.Parse()
 
-    if *help || *url == "" || *outDir == "" {
+    if *help || *input == "" || *outDir == "" {
         flag.Usage()
         os.Exit(1)
     }
 
-    fmt.Printf("[+] Retriving Sourcemap from %s\n", *url)
+    fmt.Printf("[+] Retriving Sourcemap from %s\n", *input)
 
-    sm := getSourceMap(*url)
+    sm := getSourceMap(*input)
     //fmt.Printf("%+v\n", sm)
 
     fmt.Printf("[+] Retrieved Sourcemap with version %d, containing %d entries\n", sm.Version, len(sm.Sources))

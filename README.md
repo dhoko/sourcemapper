@@ -13,15 +13,15 @@ Usage of ./sourcemapper:
         Show help
   -output string
         Source file output directory
-  -url string
-        URL to the Sourcemap file
+  -input string
+        path to the Sourcemap file
 ```
 
 Sourcemapper will download the map file at `url`, and then spit the sources out into the directory defined by `output`
 
 ```None
-doi@asov:~$ ./sourcemapper -o dhubsrc -u https://hub.docker.com/public/js/client.356c14916fb23f85707f.js.map
-[+] Retriving Sourcemap from https://hub.docker.com/public/js/client.356c14916fb23f85707f.js.map
+doi@asov:~$ ./sourcemapper -output dhubsrc -input client.356c14916fb23f85707f.js.map
+[+] Retriving Sourcemap from client.356c14916fb23f85707f.js.map
 [+] Read 23045027 bytes, parsing JSON
 [+] Retrieved Sourcemap with version 3, containing 1828 entries
 [+] Writing 9076765 bytes to dhubsrc/webpack:/js/client.356c14916fb23f85707f.js
