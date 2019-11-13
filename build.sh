@@ -2,4 +2,9 @@
 
 export GOBIN="$(pwd)/bin"
 go install main.go
-mv bin/main bin/sourcemapper
+
+if [[ "$OSTYPE" = "darwin"* ]]; then
+  mv bin/main bin/isourcemapper
+else
+  mv bin/main bin/sourcemapper
+fi

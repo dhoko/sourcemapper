@@ -48,6 +48,9 @@ doi@asov:~/dhubsrc$ cd webpack\:/app/scripts/
 actions/     components/  middlewares/ reducers/    selectors/   stores/      vendor/
 doi@asov:~/dhubsrc$ cd webpack\:/app/scripts/components/
 ```
+### For MacOS
+
+Binary: `isourcemapper`
 
 ## Limitations
 
